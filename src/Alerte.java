@@ -1,3 +1,4 @@
+// fonctionnalité alertes - Aziz
 public class Alerte {
     private int id;
     private String type;
