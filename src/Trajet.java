@@ -1,3 +1,4 @@
+// fonctionnalité recherche itinéraire - Amine
 public class Trajet {
     private int id;
     private String depart;
