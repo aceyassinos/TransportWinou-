@@ -1,3 +1,4 @@
+// fonctionnalité suivi temps réel - Yassine
 public class Ligne {
     private int id;
     private String nom;
