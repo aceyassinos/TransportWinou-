@@ -1,3 +1,4 @@
+// fonctionnalité suivi temps réel - Yassine
 public class GPS {
     public void envoyerPosition(Ligne ligne) {
         if (ligne == null) {
