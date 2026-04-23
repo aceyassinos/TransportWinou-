@@ -79,3 +79,4 @@ public class Utilisateur {
                "}";
     }
 }
+// contribution Khalil - amélioration Sprint 2
