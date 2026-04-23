@@ -1,15 +1,15 @@
 // ajout authentification - Khalil
 public class Utilisateur {
-    private int id;
-    private String nom;
-    private String email;
-    private String motDePasse;
+    private final int id;
+    private final String nom;
+    private final String email;
+    private final String motDePasse;
 
     public Utilisateur(int id, String nom, String email, String motDePasse) {
         this.id = id;
-        this.nom = nom;
-        this.email = email;
-        this.motDePasse = motDePasse;
+        this.nom = nom != null ? nom : "";
+        this.email = email != null ? email.trim() : "";
+        this.motDePasse = motDePasse != null ? motDePasse : "";
     }
 
     public int getId() {
@@ -28,18 +28,54 @@ public class Utilisateur {
         return motDePasse;
     }
 
-    public void sInscrire() {
-        System.out.println("Utilisateur " + nom + " (" + email + ") est inscrit avec succès.");
+    public boolean sInscrire() {
+        boolean isValidEmail = email != null && !email.isBlank();
+        if (isValidEmail) {
+            System.out.println("Utilisateur " + nom + " (" + email + ") est inscrit avec succès.");
+        } else {
+            System.out.println("Inscription échouée : email invalide.");
+        }
+        return isValidEmail;
     }
 
-    public void seConnecter() {
-        System.out.println("Utilisateur " + nom + " s'est connecté avec l'email " + email + ".");
+    public boolean seConnecter(String email, String motDePasse) {
+        if (email == null || email.isBlank() || motDePasse == null || motDePasse.isBlank()) {
+            System.out.println("Connexion échouée : email ou mot de passe invalide.");
+            return false;
+        }
+
+        if (this.email.equals(email) && this.motDePasse.equals(motDePasse)) {
+            System.out.println("Utilisateur " + nom + " s'est connecté avec l'email " + email + ".");
+            return true;
+        } else {
+            System.out.println("Connexion échouée pour " + email + ".");
+            return false;
+        }
     }
-    public void recevoirAlerte(String message) {
-    System.out.println("Alerte reçue par " + nom + " : " + message);
+
+    public void recevoirNotification(Notification notif) {
+        if (notif == null) {
+            System.out.println("Notification invalide pour " + nom + ".");
+            return;
+        }
+        System.out.println("Notification reçue par " + nom + " :");
+        notif.afficher();
     }
+
+    public void consulterTrajet(Trajet trajet) {
+        if (trajet == null) {
+            System.out.println("Trajet invalide pour " + nom + ".");
+            return;
+        }
+        System.out.println("Utilisateur " + nom + " consulte le trajet : " + trajet.getDepart() + " -> " + trajet.getDestination() + ".");
+    }
+
     @Override
     public String toString() {
-        return "Utilisateur: " + nom + " (" + email + ")";
+        return "Utilisateur {\n" +
+               "  id: " + id + ",\n" +
+               "  nom: '" + nom + "',\n" +
+               "  email: '" + email + "'\n" +
+               "}";
     }
 }
